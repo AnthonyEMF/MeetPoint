@@ -25,12 +25,12 @@ namespace MeetPoint.API.Database
 				var entity = entry.Entity as BaseEntity;
 				if (entity != null)
 				{
-					if (entry.State == EntityState.Added)
+					if (entry.State == EntityState.Added) // SI esta agregando
 					{
 						entity.CreatedBy = _authService.GetUserId();
 						entity.CreatedDate = DateTime.Now;
 					}
-					else
+					else // Si no, esta editando
 					{
 						entity.UpdatedBy = _authService.GetUserId();
 						entity.UpdatedDate = DateTime.Now;
@@ -43,9 +43,10 @@ namespace MeetPoint.API.Database
 
 		public DbSet<CategoryEntity> Categories { get; set; }
 		public DbSet<EventEntity> Events { get; set; }
-
-		//public DbSet<UserEntity> Users { get; set; }
-		//public DbSet<AttendanceEntity> Attendances { get; set; }
-		//public DbSet<CommentEntity> Comments { get; set; }
+		public DbSet<UserEntity> Users { get; set; }
+		public DbSet<AttendanceEntity> Attendances { get; set; }
+		public DbSet<CommentEntity> Comments { get; set; }
+		public DbSet<EventAttendanceEntity> EventsAttendances { get; set; }
+		public DbSet<EventCommentEntity> EventsComments { get; set; }
 	}
 }

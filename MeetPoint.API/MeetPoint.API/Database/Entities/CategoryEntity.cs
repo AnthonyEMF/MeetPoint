@@ -15,5 +15,8 @@ namespace MeetPoint.API.Database.Entities
 		[StringLength(200)]
         [Column("description")]
         public string Description { get; set; }
-    }
+
+		// Eventos que pertenencen a la Categoría
+		public virtual IEnumerable<EventEntity> Events { get; set; }
+	}
 }

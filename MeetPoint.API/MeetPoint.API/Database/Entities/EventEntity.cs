@@ -6,9 +6,13 @@ namespace MeetPoint.API.Database.Entities
 	[Table("events", Schema = "dbo")]
 	public class EventEntity : BaseEntity
 	{
+		// Categoria a la que pertenece el evento
 		[Column("category_id")]
         public Guid CategoryId { get; set; }
+		[ForeignKey(nameof(CategoryId))]
+		public virtual CategoryEntity Category { get; set; }
 
+		// Creador del evento
 		[Column("organizer_id")]
 		public Guid OrganizerId { get; set; }
 
@@ -31,8 +35,13 @@ namespace MeetPoint.API.Database.Entities
 		[Column("date")]
 		public DateTime Date { get; set; }
 
-		[Required(ErrorMessage = "El campo fecha de publicación es requerido.")]
 		[Column("publication_date")]
         public DateTime PublicationDate { get; set; }
-    }
+
+		// Comentarios del evento
+		public virtual IEnumerable<EventCommentEntity> Comments { get; set; }
+
+		// Asistencias del evento
+		public virtual IEnumerable<EventAttendanceEntity> Attendances { get; set; }
+	}
 }

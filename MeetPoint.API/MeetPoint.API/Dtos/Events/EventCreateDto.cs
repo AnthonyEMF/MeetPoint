@@ -25,5 +25,8 @@ namespace MeetPoint.API.Dtos.Events
 		public DateTime Date { get; set; }
 
         public DateTime PublicationDate { get; set; }
-    }
+
+		public virtual List<string> CommentsList { get; set; }
+		public virtual List<string> AttendancesList { get; set; }
+	}
 }

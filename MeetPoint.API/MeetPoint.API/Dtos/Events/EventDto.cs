@@ -10,7 +10,7 @@ namespace MeetPoint.API.Dtos.Events
 
         public virtual CategoryDto Category { get; set; }
 
-		public Guid OrganizerId { get; set; } //public virtual UserDto Organizer { get; set; }
+		public Guid OrganizerId { get; set; }
 
 		public string Title { get; set; }
 
@@ -21,5 +21,8 @@ namespace MeetPoint.API.Dtos.Events
 		public DateTime Date { get; set; }
 
         public DateTime PublicationDate { get; set; }
-    }
+
+		public List<string>  Comments { get; set; }
+		public List<string>  Attendances { get; set; }
+	}
 }

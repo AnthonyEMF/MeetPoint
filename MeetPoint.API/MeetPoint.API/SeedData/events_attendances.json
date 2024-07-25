@@ -1,0 +1,17 @@
+[
+  {
+    "Id": "60e0d780-0e24-49b1-9ccd-b68b3a3dc3ca",
+    "EventId": "ddffdfd7-42b2-465f-a7d0-37a1e766fe44",
+    "AttendanceId": "9ebdfd83-1d51-4281-aee9-262b42d3302e"
+  },
+  {
+    "Id": "3325d857-6862-4998-b58f-af1cfd694e38",
+    "EventId": "c727a1ea-f651-4392-b2e3-54cfa33db3db",
+    "AttendanceId": "97584257-0ad6-45ce-9148-2c56770cd936"
+  },
+  {
+    "Id": "40c8837e-0c96-4cae-a6b0-009b8a1fc40f",
+    "EventId": "3a81e7ee-16b2-41f5-951e-150245b5060b",
+    "AttendanceId": "e6e456d2-43fd-4882-aded-40bd6ab47271"
+  }
+]

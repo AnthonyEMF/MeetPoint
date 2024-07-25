@@ -10,6 +10,5 @@ namespace MeetPoint.API.Services.Interfaces
 		Task<ResponseDto<CategoryDto>> CreateAsync(CategoryCreateDto dto);
 		Task<ResponseDto<CategoryDto>> EditAsync(CategoryEditDto dto, Guid id);
 		Task<ResponseDto<CategoryDto>> DeleteAsync(Guid id);
-
 	}
 }

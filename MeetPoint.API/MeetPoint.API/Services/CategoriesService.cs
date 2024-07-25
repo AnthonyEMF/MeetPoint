@@ -62,9 +62,6 @@ namespace MeetPoint.API.Services
 		{
 			var categoryEntity = _mapper.Map<CategoryEntity>(dto);
 
-			// TODO: Validar que los nombres de las categorias no se repitan.
-
-			// Agregar y guardar cambios
 			_context.Categories.Add(categoryEntity);
 			await _context.SaveChangesAsync();
 
