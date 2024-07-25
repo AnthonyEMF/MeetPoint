@@ -1,0 +1,18 @@
+meta {
+  name: Create
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://localhost:7280/api/categories
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Editame",
+    "description": "Por favor editame..."
+  }
+}

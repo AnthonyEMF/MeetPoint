@@ -1,0 +1,17 @@
+[
+  {
+    "Id": "543aa099-c9a3-4129-a29b-92c34e4c4828",
+    "Name": "Recreativos",
+    "Description": "Eventos para socializar y salir de la rutina diaría."
+  },
+  {
+    "Id": "f65ece15-da8c-4df0-a54a-6a91e67dd75a",
+    "Name": "Didácticos",
+    "Description": "Eventos para aprender algo nuevo."
+  },
+  {
+    "Id": "21abd8c2-e887-4f01-85a5-6be5df519761",
+    "Name": "Informativos",
+    "Description": "Eventos para anunciar algo importante."
+  }
+]
