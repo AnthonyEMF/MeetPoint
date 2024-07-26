@@ -25,12 +25,12 @@ namespace MeetPoint.API.Database
 				var entity = entry.Entity as BaseEntity;
 				if (entity != null)
 				{
-					if (entry.State == EntityState.Added) // SI esta agregando
+					if (entry.State == EntityState.Added)
 					{
 						entity.CreatedBy = _authService.GetUserId();
 						entity.CreatedDate = DateTime.Now;
 					}
-					else // Si no, esta editando
+					else
 					{
 						entity.UpdatedBy = _authService.GetUserId();
 						entity.UpdatedDate = DateTime.Now;

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MeetPoint.API.Database;
 using MeetPoint.API.Dtos.Common;
-using MeetPoint.API.Dtos.Events;
+using MeetPoint.API.Dtos.Users;
 using MeetPoint.API.Services.Interfaces;
 
 namespace MeetPoint.API.Services

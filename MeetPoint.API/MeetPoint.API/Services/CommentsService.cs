@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MeetPoint.API.Database;
+using MeetPoint.API.Dtos.Comments;
 using MeetPoint.API.Dtos.Common;
 using MeetPoint.API.Services.Interfaces;
 
@@ -16,12 +17,12 @@ namespace MeetPoint.API.Services
             this._mapper = mapper;
         }
 
-        public Task<ResponseDto<List<CommentDto>>> GetAllEventsAsync()
+        public Task<ResponseDto<List<CommentDto>>> GetAllCommentsAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<ResponseDto<CommentDto>> GetEventByIdAsync(Guid id)
+        public Task<ResponseDto<CommentDto>> GetCommentByIdAsync(Guid id)
         {
             throw new NotImplementedException();
         }

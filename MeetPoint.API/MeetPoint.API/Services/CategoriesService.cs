@@ -10,7 +10,6 @@ namespace MeetPoint.API.Services
 {
 	public class CategoriesService : ICategoriesService
 	{
-		// Variables necesarias para acceder a la Base de datos y función de AutoMapper
 		private readonly MeetPointContext _context;
 		private readonly IMapper _mapper;
 
@@ -92,7 +91,6 @@ namespace MeetPoint.API.Services
 
 			_mapper.Map<CategoryEditDto, CategoryEntity>(dto, categoryEntity);
 
-			// Actualizar y guardar cambios
 			_context.Categories.Update(categoryEntity);
 			await _context.SaveChangesAsync();
 
@@ -119,7 +117,6 @@ namespace MeetPoint.API.Services
 				};
 			}
 
-			// Eliminar y guardar cambios
 			_context.Categories.Remove(categoryEntity);
 			await _context.SaveChangesAsync();
 

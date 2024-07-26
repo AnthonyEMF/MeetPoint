@@ -1,4 +1,5 @@
-﻿using MeetPoint.API.Dtos.Common;
+﻿using MeetPoint.API.Dtos.Attendances;
+using MeetPoint.API.Dtos.Common;
 
 namespace MeetPoint.API.Services.Interfaces
 {

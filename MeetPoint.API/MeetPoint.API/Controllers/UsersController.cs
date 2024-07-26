@@ -1,4 +1,5 @@
 ﻿using MeetPoint.API.Dtos.Common;
+using MeetPoint.API.Dtos.Users;
 using MeetPoint.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

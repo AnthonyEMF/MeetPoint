@@ -1,4 +1,5 @@
-﻿using MeetPoint.API.Dtos.Common;
+﻿using MeetPoint.API.Dtos.Attendances;
+using MeetPoint.API.Dtos.Common;
 using MeetPoint.API.Dtos.Events;
 using MeetPoint.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -6,48 +7,48 @@ using Microsoft.AspNetCore.Mvc;
 namespace MeetPoint.API.Controllers
 {
     [ApiController]
-    [Route("api/events")]
+    [Route("api/attendances")]
     public class AttendancesController : ControllerBase
     {
-        private readonly IAttendancesService _AttendancesService;
+        private readonly IAttendancesService _attendancesService;
 
         public AttendancesController(IAttendancesService attendancesService)
         {
-            this._AttendancesService = attendancesService;
+            this._attendancesService = attendancesService;
         }
 
         [HttpGet]
         public async Task<ActionResult<ResponseDto<List<AttendanceDto>>>> GetAll()
         {
-            var response = await _AttendancesService.GetAllAttendancesAsync();
+            var response = await _attendancesService.GetAllAttendancesAsync();
             return StatusCode(response.StatusCode, response);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ResponseDto<AttendanceDto>>> Get(Guid id)
         {
-            var response = await _AttendancesService.GetAttendanceByIdAsync(id);
+            var response = await _attendancesService.GetAttendanceByIdAsync(id);
             return StatusCode(response.StatusCode, response);
         }
 
         [HttpPost]
         public async Task<ActionResult<ResponseDto<AttendanceDto>>> Create(AttendanceCreateDto dto)
         {
-            var response = await _AttendancesService.CreateAsync(dto);
+            var response = await _attendancesService.CreateAsync(dto);
             return StatusCode(response.StatusCode, response);
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult<ResponseDto<AttendanceDto>>> Edit(AttendanceEditDto dto, Guid id)
         {
-            var response = await _AttendancesService.EditAsync(dto, id);
+            var response = await _attendancesService.EditAsync(dto, id);
             return StatusCode(response.StatusCode, response);
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<ResponseDto<AttendanceDto>>> Delete(Guid id)
         {
-            var response = await _AttendancesService.DeleteAsync(id);
+            var response = await _attendancesService.DeleteAsync(id);
             return StatusCode(response.StatusCode, response);
         }
     }

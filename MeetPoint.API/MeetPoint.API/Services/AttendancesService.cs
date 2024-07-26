@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MeetPoint.API.Database;
+using MeetPoint.API.Dtos.Attendances;
 using MeetPoint.API.Dtos.Common;
 using MeetPoint.API.Services.Interfaces;
 
@@ -7,13 +8,13 @@ namespace MeetPoint.API.Services
 {
     public class AttendancesService : IAttendancesService
     {
-        private readonly MeetPointContext context;
-        private readonly IMapper mapper;
+        private readonly MeetPointContext _context;
+        private readonly IMapper _mapper;
 
         public AttendancesService(MeetPointContext context, IMapper mapper)
         {
-            this.context = context;
-            this.mapper = mapper;
+            this._context = context;
+            this._mapper = mapper;
         }
 
         public Task<ResponseDto<List<AttendanceDto>>> GetAllAttendancesAsync()

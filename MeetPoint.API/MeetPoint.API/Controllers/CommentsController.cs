@@ -1,11 +1,12 @@
-﻿using MeetPoint.API.Dtos.Common;
+﻿using MeetPoint.API.Dtos.Comments;
+using MeetPoint.API.Dtos.Common;
 using MeetPoint.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MeetPoint.API.Controllers
 {
     [ApiController]
-    [Route("api/events")]
+    [Route("api/comments")]
     public class CommentsController : ControllerBase
     {
         private readonly ICommentsService _commentsService;
@@ -18,14 +19,14 @@ namespace MeetPoint.API.Controllers
         [HttpGet]
         public async Task<ActionResult<ResponseDto<List<CommentDto>>>> GetAll()
         {
-            var response = await _commentsService.GetAllEventsAsync();
+            var response = await _commentsService.GetAllCommentsAsync();
             return StatusCode(response.StatusCode, response);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ResponseDto<CommentDto>>> Get(Guid id)
         {
-            var response = await _commentsService.GetEventByIdAsync(id);
+            var response = await _commentsService.GetCommentByIdAsync(id);
             return StatusCode(response.StatusCode, response);
         }
 
