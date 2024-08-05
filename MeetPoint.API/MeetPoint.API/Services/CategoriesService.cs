@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MeetPoint.API.Constants;
 using MeetPoint.API.Database;
 using MeetPoint.API.Database.Entities;
 using MeetPoint.API.Dtos.Categories;
@@ -10,26 +11,53 @@ namespace MeetPoint.API.Services
 {
 	public class CategoriesService : ICategoriesService
 	{
+		// Contexto de la Base de Datos
 		private readonly MeetPointContext _context;
+		// Mapeos para Entities y Dtos
 		private readonly IMapper _mapper;
+		// Variable para la paginación
+		private readonly int PAGE_SIZE;
 
-		public CategoriesService(MeetPointContext context, IMapper mapper)
+		public CategoriesService(MeetPointContext context, IMapper mapper, IConfiguration configuration)
         {
 			this._context = context;
 			this._mapper = mapper;
+			PAGE_SIZE = configuration.GetValue<int>("PageSize");
 		}
 
-        public async Task<ResponseDto<List<CategoryDto>>> GetAllCategoriesAsync()
+        public async Task<ResponseDto<PaginationDto<List<CategoryDto>>>> GetAllCategoriesAsync(string searchTerm = "", int page = 1)
 		{
-			var categoriesEntities = await _context.Categories.ToListAsync();
-			var categoriesDtos = _mapper.Map<List<CategoryDto>>(categoriesEntities);
+			int startIndex = (page - 1) * PAGE_SIZE;
 
-			return new ResponseDto<List<CategoryDto>>
+			var categoriesEntityQuery = _context.Categories
+				.Where(x => x.Description.ToLower().Contains(searchTerm.ToLower()));
+
+			var totalCategories = await categoriesEntityQuery.CountAsync();
+			var totalPages = (int)Math.Ceiling((double)totalCategories / PAGE_SIZE);
+
+			var categoriesEntity = await categoriesEntityQuery
+				.OrderBy(u => u.Description)
+				.Skip(startIndex)
+				.Take(PAGE_SIZE)
+				.ToListAsync();
+
+			var categoriesDtos = _mapper.Map<List<CategoryDto>>(categoriesEntity);
+
+			return new ResponseDto<PaginationDto<List<CategoryDto>>>
 			{
 				StatusCode = 200,
 				Status = true,
-				Message = "Lista de Categorías obtenida correctamente.",
-				Data = categoriesDtos
+				Message = MessagesConstant.RECORDS_FOUND,
+				Data = new PaginationDto<List<CategoryDto>>
+				{
+					CurrentPage = page,
+					PageSize = PAGE_SIZE,
+					TotalItems = totalCategories,
+					TotalPages = totalPages,
+					Items = categoriesDtos,
+					HasPreviousPage = page > 1,
+					HasNextPage = page < totalPages
+				}
 			};
 		}
 
@@ -42,7 +70,7 @@ namespace MeetPoint.API.Services
 				{
 					StatusCode = 404,
 					Status = false,
-					Message = "No se encontró la Categoría."
+					Message = MessagesConstant.RECORD_NOT_FOUND
 				};
 			}
 
@@ -52,7 +80,7 @@ namespace MeetPoint.API.Services
 			{
 				StatusCode = 200,
 				Status = true,
-				Message = "Categoría encontrada.",
+				Message = MessagesConstant.RECORD_FOUND,
 				Data = categoryDto
 			};
 		}
@@ -70,7 +98,7 @@ namespace MeetPoint.API.Services
 			{
 				StatusCode = 201,
 				Status = true,
-				Message = "Categoría creada correctamente.",
+				Message = MessagesConstant.CREATE_SUCCESS,
 				Data = categoryDto
 			};
 		}
@@ -85,7 +113,7 @@ namespace MeetPoint.API.Services
 				{
 					StatusCode = 404,
 					Status = false,
-					Message = "No se encontró la Categoría."
+					Message = MessagesConstant.RECORD_NOT_FOUND,
 				};
 			}
 
@@ -100,10 +128,11 @@ namespace MeetPoint.API.Services
 			{
 				StatusCode = 200,
 				Status = true,
-				Message = "Categoría editada correctamente.",
+				Message = MessagesConstant.UPDATE_SUCCESS,
 				Data = categoryDto
 			};
 		}
+
 		public async Task<ResponseDto<CategoryDto>> DeleteAsync(Guid id)
 		{
 			var categoryEntity = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
@@ -113,7 +142,7 @@ namespace MeetPoint.API.Services
 				{
 					StatusCode = 404,
 					Status = false,
-					Message = "No se encontró la Categoría."
+					Message = MessagesConstant.RECORD_NOT_FOUND
 				};
 			}
 
@@ -124,7 +153,7 @@ namespace MeetPoint.API.Services
 			{
 				StatusCode = 200,
 				Status = true,
-				Message = "Categoría eliminada correctamente."
+				Message = MessagesConstant.DELETE_SUCCESS
 			};
 		}
 	}
