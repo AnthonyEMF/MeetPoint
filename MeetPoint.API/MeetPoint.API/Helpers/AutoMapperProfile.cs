@@ -28,7 +28,16 @@ namespace MeetPoint.API.Helpers
 
 		private void MapsForEvents()
 		{
-			CreateMap<EventEntity, EventDto>();
+			CreateMap<EventEntity, EventDto>()
+				.ForMember(dest => dest.Attendances, opt => opt
+				.MapFrom(src => src.Attendances
+				.Select(ea => ea.Attendance.State) // TODO: Ademas del state, concatenar el nombre de Usuario
+				.ToList()))
+				.ForMember(dest => dest.Comments, opt => opt
+				.MapFrom(src => src.Comments
+				.Select(ec => ec.Comment.Content)
+				.ToList()));
+
 			CreateMap<EventCreateDto, EventEntity>();
 			CreateMap<EventEditDto, EventEntity>();
 		}

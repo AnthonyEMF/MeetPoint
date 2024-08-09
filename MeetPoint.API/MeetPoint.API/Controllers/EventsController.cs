@@ -17,9 +17,9 @@ namespace MeetPoint.API.Controllers
 		}
 
 		[HttpGet]
-		public async Task<ActionResult<ResponseDto<List<EventDto>>>> GetAll()
+		public async Task<ActionResult<ResponseDto<List<EventDto>>>> GetAll(string searchTerm = "", int page = 1)
 		{
-			var response = await _eventsService.GetAllEventsAsync();
+			var response = await _eventsService.GetAllEventsAsync(searchTerm, page);
 			return StatusCode(response.StatusCode, response);
 		}
 

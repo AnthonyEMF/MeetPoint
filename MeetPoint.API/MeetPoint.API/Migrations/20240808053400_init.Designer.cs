@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeetPoint.API.Migrations
 {
     [DbContext(typeof(MeetPointContext))]
-    [Migration("20240726050954_init")]
+    [Migration("20240808053400_init")]
     partial class init
     {
         /// <inheritdoc />

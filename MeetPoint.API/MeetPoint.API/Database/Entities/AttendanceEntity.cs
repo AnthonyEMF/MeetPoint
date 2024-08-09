@@ -8,6 +8,7 @@ namespace MeetPoint.API.Database.Entities
 	{
 		[Column("user_id")]
         public string UserId { get; set; }
+		// Llave Foranea ?
 
         [Required(ErrorMessage = "Especificar el estado de la asistencia es requerido.")]
 		[StringLength(10)]
